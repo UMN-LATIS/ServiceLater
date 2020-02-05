@@ -1,0 +1,1 @@
+<a href="{{route("incidents.show", ["incident"=>$id])}}">{{ $incident }}</a>
