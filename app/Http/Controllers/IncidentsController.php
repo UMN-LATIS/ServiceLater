@@ -6,11 +6,11 @@ use App\DataTables\IncidentsDataTable;
 
 use Illuminate\Http\Request;
 use App\Incident;
+use Auth;
 class IncidentsController extends Controller
 {
     public function index(IncidentsDataTable $dataTable)
     {
-
         return $dataTable->render('incidents.index');
     }
 

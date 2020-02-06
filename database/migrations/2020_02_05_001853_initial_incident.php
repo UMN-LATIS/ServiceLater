@@ -21,11 +21,13 @@ class InitialIncident extends Migration
             $table->string('short_description')->nullable();
             $table->integer('assignment_group_id')->unsigned();
             $table->string('service_offering_name')->nullable();
-            $table->string('opened_by')->nullable();
-            $table->text('work_notes')->nullable();
+            $table->string('opened_by_name')->nullable();
+            $table->string('opened_by_internet_id')->nullable();
+            $table->text('work_notes_and_comments')->nullable();
             $table->text('close_notes')->nullable();
-            $table->text('comments')->nullable();
+            $table->text('search')->nullable();
         });
+        DB::statement('ALTER TABLE incidents ADD FULLTEXT fulltext_index (search)');
     }
 
     /**

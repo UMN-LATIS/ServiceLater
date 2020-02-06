@@ -6,24 +6,34 @@
         "framework",
         "laravel"
     ],
+    "repositories": [
+    {
+      "type": "vcs",
+      "url": "https://github.com/UMN-LATIS/laravel-shibboleth"
+    }
+    ],
     "license": "MIT",
     "require": {
         "php": "^7.2",
         "fideloper/proxy": "^4.0",
         "laravel/framework": "^6.2",
+        "laravel/helpers": "^1.1",
         "laravel/tinker": "^2.0",
         "league/csv": "^9.5",
         "nesbot/carbon": "^2.29",
+        "razorbacks/laravel-shibboleth": "dev-umn",
         "yajra/laravel-datatables": "^1.5",
         "yajra/laravel-datatables-oracle": "~9.0"
     },
     "require-dev": {
+        "appzcoder/crud-generator": "^3.1",
         "facade/ignition": "^1.4",
         "fzaninotto/faker": "^1.9.1",
         "laravel/ui": "^1.1",
         "mockery/mockery": "^1.0",
         "nunomaduro/collision": "^3.0",
-        "phpunit/phpunit": "^8.0"
+        "phpunit/phpunit": "^8.0",
+        "deployer/recipes": "^6.1"
     },
     "config": {
         "optimize-autoloader": true,

@@ -68,10 +68,25 @@ class importCSV extends Command
             $incident->opened_at = Carbon::parse($record['opened_at']);
             $incident->closed_at = Carbon::parse($record['closed_at']);
             $incident->service_offering_name = $record['service_offering.name'];
-            $incident->opened_by = $record['opened_by'];
-            $incident->work_notes = iconv("UTF-8","UTF-8//IGNORE",$record['work_notes']);
+            
+            $openedBy = $record['opened_by'];
+            preg_match("/\((.*?)\)/", $openedBy, $matches);
+            if(count($matches) > 0) {
+                $internetId = $matches[1];
+                $name = str_replace("()", "", str_replace($internetId, "", $openedBy));
+                $incident->opened_by_name = $name;
+                $incident->opened_by_internet_id = $internetId;
+            }
+            else {
+                $incident->opened_by_name = $openedBy;
+            }
+
+            $incident->work_notes_and_comments = iconv("UTF-8","UTF-8//IGNORE",$record['u_comments_and_work_notes']);
             $incident->close_notes = iconv("UTF-8","UTF-8//IGNORE",$record['close_notes']);
-            $incident->comments = iconv("UTF-8","UTF-8//IGNORE",$record['comments']);
+            $searchField = implode(" ", [$incident->short_description, $incident->work_notes_and_comments,  $incident->close_notes]);
+            $reservedSymbols = [".", "/","-", '+', '<', '>', '@', '(', ')', '~'];
+            $searchField = str_replace($reservedSymbols, '', $searchField);
+            $incident->search = $searchField;
             $incident->assignmentGroup()->associate($assignmentGroup);
             $incident->save();
         }

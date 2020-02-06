@@ -23,14 +23,40 @@ class IncidentsDataTable extends DataTable
             ->eloquent($query)
             ->filter(function ($query) {
                     if (request()->has('name') && strlen(request('name')) > 2 ) {
-                        $query->where('opened_by', 'like', "%" . request('name') . "%");
+                        $query->where(function($q) {
+                            $q->where('opened_by_internet_id', "=", request('name'));
+                            $q->orWhere('opened_by_name', 'like', "%" . request('name') . "%");
+                        });
+                        
+                    }
+                    if (request()->has('incident') && strlen(request('incident')) > 2 ) {
+                        $incident = strtoupper(request("incident"));
+                        if(strpos($incident, "INC") === false) {
+                            $incident = "INC" . request("incident");
+                        }
+                       
+                        $query->where('incident', "=",   $incident);
                     }
                     // TODO VERIFY USER HAS PERMS
                     if (request()->has('assignmentGroup') && request('assignmentGroup') != "All") {
                         $query->where('assignment_group_id', '=', request('assignmentGroup'));
                     }
+                    if (request()->has('searchField') && strlen(request('searchField'))>2) {
+                        if(request()->has('fullText') && request('fullText') == "true") {
+                            $query->search(request('searchField'));
+                        }
+                        else {
+                            $searchTerm = request("searchField");
+                            $query->whereRaw("CONCAT(short_description,work_notes_and_comments,close_notes) like ?", ["%{$searchTerm}%"]);
+                        }
+                      
+                        
+                    }
                 })
             ->addColumn('incident', 'incidents.action')
+            ->editColumn('opened_by_name', function ($incident) {
+                  return $incident->opened_by_name .' ('.$incident->opened_by_internet_id . ')';
+            })
             ->rawColumns(['incident']);
     }
 
@@ -53,6 +79,9 @@ class IncidentsDataTable extends DataTable
     public function html()
     {
         return $this->builder()
+                    ->parameters([
+                        'pageLength' => 20,
+                    ])
                     ->setTableId('incidents-table')
                     ->columns($this->getColumns())
                     ->ajax([
@@ -61,6 +90,9 @@ class IncidentsDataTable extends DataTable
                         'data' => "function (d) {
                             d.name = $('input[name=user]').val();
                             d.assignmentGroup = $('select[name=assignmentGroup]').val();
+                            d.searchField = $('input[name=searchField]').val();
+                            d.incident = $('input[name=incident]').val();
+                            d.fullText = $('input[name=fullText]').is(':checked');
             }",
                     ])
                     ->dom('rtip')
@@ -75,9 +107,13 @@ class IncidentsDataTable extends DataTable
      */
     protected function getColumns()
     {
+        $openedBy = Column::make('opened_by_name');
+        $openedBy->title("Opened By");
         return [
             Column::make('incident'),
-            Column::make('short_description')
+            Column::make('opened_at'),
+            Column::make('short_description'),
+            $openedBy
         ];
     }
 
