@@ -7,8 +7,9 @@ require 'recipe/npm.php';
 set('ssh_type', 'native');
 set('ssh_multiplexing', true);
 
-set('repository', 'git@github.com:umn-latis/servicelater.git');
+set('repository', 'git@github.com:UMN-LATIS/ServiceLater.git');
 
+set('writable_use_sudo', true);
 add('shared_files', []);
 add('shared_dirs', []);
 
