@@ -17,7 +17,7 @@ class UserFeatures extends Migration
             $table->boolean("admin")->default(false);
         });
 
-        Schema::table("assignment_group_user",function(Blueprint $table) {
+        Schema::create("assignment_group_user",function(Blueprint $table) {
             $table->integer("user_id")->unsigned()->nullable();
             $table->foreign('user_id')->references('id')
             ->on('users')->onDelete('cascade');
