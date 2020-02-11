@@ -15,6 +15,12 @@ class IncidentsController extends Controller
     }
 
     public function show(Incident $incident) {
-        return view("incidents.show", ["incident"=>$incident]);
+        if(Auth::user()->assignmentGroups->contains($incident->assignmentGroup)) {
+            return view("incidents.show", ["incident"=>$incident]);
+        }
+        else {
+            abort(403);
+        }
+        
     }
 }

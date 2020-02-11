@@ -16,7 +16,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'admin', 'email', 'password',
+        'admin', 'email', 'password', 'name'
     ];
 
     /**
@@ -36,6 +36,17 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    public static function boot()
+    {
+        parent::boot();
+         self::created(function(User $user){
+            $assignmentGroup = \App\AssignmentGroup::where("group_name", "Sample Group")->firstOrFail();
+            $user->assignmentGroups()->attach($assignmentGroup->id);
+            $user->save();
+        });
+
+    }
 
     public function assignmentGroups()
     {

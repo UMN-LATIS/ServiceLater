@@ -52,7 +52,7 @@
 
 
 
-<input name="search" id="search" class="btn btn-primary" type="submit" value="search">
+<input name="search" id="search" class="btn btn-primary" type="submit" value="Search">
 </form>
 {{$dataTable->table([], true)}}
 

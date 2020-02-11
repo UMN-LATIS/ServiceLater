@@ -8,7 +8,7 @@ use Yajra\DataTables\Html\Column;
 use Yajra\DataTables\Html\Editor\Editor;
 use Yajra\DataTables\Html\Editor\Fields;
 use Yajra\DataTables\Services\DataTable;
-
+use Auth;
 class IncidentsDataTable extends DataTable
 {
     /**
@@ -39,7 +39,14 @@ class IncidentsDataTable extends DataTable
                     }
                     // TODO VERIFY USER HAS PERMS
                     if (request()->has('assignmentGroup') && request('assignmentGroup') != "All") {
+                        if(!Auth::user()->assignmentGroups->pluck("id")->contains(request('assignmentGroup'))) {
+                            abort(403);
+                        }
                         $query->where('assignment_group_id', '=', request('assignmentGroup'));
+                    }
+
+                    if (request()->has('assignmentGroup') && request('assignmentGroup') == "All") {
+                        $query->whereIn("assignment_group_id", Auth::user()->assignmentGroups->pluck("id"));
                     }
                     if (request()->has('searchField') && strlen(request('searchField'))>2) {
                         if(request()->has('fullText') && request('fullText') == "true") {
