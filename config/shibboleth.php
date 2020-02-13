@@ -78,7 +78,7 @@ return array(
         // fillable user model attribute => server variable
         'email'       => 'eppn',
         'umndid' => 'umnDID',
-        'name' => 'displayName',
+        'name' => 'eppn',
         // 'enrolled_courses'=>'https://www.umn.edu/shibboleth/attributes/umnCourse',
     ],
 
