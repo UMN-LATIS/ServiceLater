@@ -1,0 +1,13 @@
+number,incident_state,opened_at,short_description,assignment_group,service_offering.name,opened_by,work_notes,user_input,u_resolved,close_notes,u_comments_and_work_notes,comments,caller_id,u_caller_list,closed_at
+INC0000001,Closed,2/13/20 17:28,mcfa0086@umn.edu - What's Service Later?,Demo,Research Support,Colin McFadden (mcfa0086),,,2/13/20 18:00,"Hope that helps!
+","2020-02-14 17:28:10 - Colin McFadden (mcfa0086) (Additional comments)
+
+Welcome to ServiceLater, an archive of ServiceNow tickets.  ServiceLater aims to allow assignment groups to continue to have access to their tickets after the transition to TeamDynamix.  Assignment group archives are exported from ServiceNow and imported into ServiceLater.  They're searchable and sortable.  You can also access specific tickets at (e.g.) http://servicelater.cla.umn.edu/INC0000001.","2020-02-14 17:28:10 - Colin McFadden (mcfa0086) (Additional comments)
+
+Welcome to ServiceLater, an archive of ServiceNow tickets.  ServiceLater aims to allow assignment groups to continue to have access to their tickets after the transition to TeamDynamix.  Assignment group archives are exported from ServiceNow and imported into ServiceLater.  They're searchable and sortable.  You can also access specific tickets at (e.g.) http://servicelater.cla.umn.edu/INC0000001.",Colin McFadden (mcfa0086),Colin McFadden (mcfa0086),1/13/20 18:00
+INC0000002,Closed,2/13/20 18:28,ebf@umn.edu - How do I get my Assignment Group added?,Demo,Research Support,Elleni Fellows (ebf),,,2/13/20 19:00,"Hope that helps!
+","2020-02-14 17:28:10 - Elleni Fellows (ebf) (Additional comments)
+
+To have your assignment group added, get in touch by emailing mcfa0086@umn.edu.  We'll wait to do the import until close to the sunset date for ServiceNow.  You'll be able to select who has access to your assignment group.","2020-02-14 17:28:10 - Elleni Fellows (ebf) (Additional comments)
+
+To have your assignment group added, get in touch by emailing mcfa0086@umn.edu.  We'll wait to do the import until close to the sunset date for ServiceNow.  You'll be able to select who has access to your assignment group.",Elleni Fellows (ebf),Elleni Fellows (ebf),1/13/20 19:00
