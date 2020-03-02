@@ -16,6 +16,10 @@ class IncidentsController extends Controller
 
     public function show(Incident $incident) {
         if(Auth::user()->assignmentGroups->contains($incident->assignmentGroup)) {
+            activity()
+                ->performedOn($incident)
+                ->causedBy(Auth::user())
+                ->log('Viewing Incident');
             return view("incidents.show", ["incident"=>$incident]);
         }
         else {

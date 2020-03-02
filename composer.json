@@ -22,6 +22,7 @@
         "league/csv": "^9.5",
         "nesbot/carbon": "^2.29",
         "razorbacks/laravel-shibboleth": "dev-umn",
+        "spatie/laravel-activitylog": "^3.10",
         "yajra/laravel-datatables": "^1.5",
         "yajra/laravel-datatables-oracle": "~9.0"
     },
