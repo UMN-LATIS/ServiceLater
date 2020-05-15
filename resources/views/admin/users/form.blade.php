@@ -1,6 +1,23 @@
 <div class="form group">
     {{ isset($user)?$user->name:"" }}
 </div>
+<div class="form-group">
+  <label for="">Name</label>
+  <input type="text"
+    class="form-control" name="name" id="" aria-describedby="helpId" value="{{ isset($user)?$user->name:null }}">
+</div>
+<div class="form-group">
+  <label for="">Email</label>
+  <input type="text"
+    class="form-control" name="email" id="" aria-describedby="helpId" value="{{ isset($user)?$user->email:null }}">
+</div>
+
+<div class="form-group">
+  <label for="">Password</label>
+  <input type="text"
+    class="form-control" name="password" id="" aria-describedby="helpId" value="shibboleth">
+</div>
+
 <div class="form-group {{ $errors->has('admin') ? 'has-error' : ''}}">
     <label for="admin" class="control-label">{{ 'Admin' }}</label>
     <div class="radio">
