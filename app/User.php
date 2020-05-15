@@ -50,6 +50,6 @@ class User extends Authenticatable
 
     public function assignmentGroups()
     {
-        return $this->belongsToMany('App\AssignmentGroup');
+        return $this->belongsToMany('App\AssignmentGroup')->orderBy('group_name');
     }
 }
