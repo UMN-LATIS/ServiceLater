@@ -1,5 +1,5 @@
 <div class="form group">
-    {{ $user->name }}
+    {{ isset($user)?$user->name:"" }}
 </div>
 <div class="form-group {{ $errors->has('admin') ? 'has-error' : ''}}">
     <label for="admin" class="control-label">{{ 'Admin' }}</label>
@@ -16,7 +16,7 @@
   <label for="">Assignment Groups</label>
   <select class="form-control" name="assignment_groups[]" id="" multiple>
     @foreach (\App\AssignmentGroup::all() as $assignmentGroup )
-    <option value={{ $assignmentGroup->id }} {{ ($user->assignmentGroups->contains($assignmentGroup->id))?"SELECTED":null }}>{{ $assignmentGroup->group_name }}</option>
+    <option value={{ $assignmentGroup->id }} {{ (isset($user) && $user->assignmentGroups->contains($assignmentGroup->id))?"SELECTED":null }}>{{ $assignmentGroup->group_name }}</option>
   
     @endforeach
     </select>
