@@ -16,7 +16,7 @@ class importCSV extends Command
      *
      * @var string
      */
-    protected $signature = 'import:csv {csvFile} {assignmentGroup}';
+    protected $signature = 'import:csv {csvFile}';
 
     /**
      * The console command description.
@@ -54,11 +54,12 @@ class importCSV extends Command
         // }
         // die;
 
-        $assignmentGroup = AssignmentGroup::where('group_name', $this->argument('assignmentGroup'))->firstOrFail();
+        
         $csv = Reader::createFromPath($csvFile, 'r');
         $csv->setEscape("");
         $csv->setHeaderOffset(0);
         $header = $csv->getHeader(); //returns the CSV header record
+        $assignmentGroups = [];
         foreach($csv->getRecords() as $record) {
 
             $incident = new Incident;
@@ -87,6 +88,12 @@ class importCSV extends Command
             $reservedSymbols = [".", "/","-", '+', '<', '>', '@', '(', ')', '~'];
             $searchField = str_replace($reservedSymbols, '', $searchField);
             $incident->search = $searchField;
+
+            if(!isset($record["assignment_group"], $assignmentGroups)) {
+                $assignmentGroups[$record["assignment_group"]] = AssignmentGroup::where('group_name', $record["assignment_group"])->firstOrFail();
+            }
+            $assignmentGroup = $assignmentGroups[$record["assignment_group"]];
+
             $incident->assignmentGroup()->associate($assignmentGroup);
             $incident->save();
         }
