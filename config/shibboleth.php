@@ -288,7 +288,7 @@ return array(
                                                 )
         */
         'signMetadata' => true,
-
+        'wantXMLValidation'=>false,
 
         /** signatures and encryptions required **/
 
