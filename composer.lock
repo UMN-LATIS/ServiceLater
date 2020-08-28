@@ -2539,12 +2539,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/UMN-LATIS/laravel-shibboleth.git",
-                "reference": "fe0eb9cb6d0e75d0a7257d22b93d98e94203d129"
+                "reference": "09756ae8061466ee7e5f0be9dc0c4103664ba9a8"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/UMN-LATIS/laravel-shibboleth/zipball/fe0eb9cb6d0e75d0a7257d22b93d98e94203d129",
-                "reference": "fe0eb9cb6d0e75d0a7257d22b93d98e94203d129",
+                "url": "https://api.github.com/repos/UMN-LATIS/laravel-shibboleth/zipball/09756ae8061466ee7e5f0be9dc0c4103664ba9a8",
+                "reference": "09756ae8061466ee7e5f0be9dc0c4103664ba9a8",
                 "shasum": ""
             },
             "require": {
@@ -2599,7 +2599,7 @@
             "support": {
                 "source": "https://github.com/UMN-LATIS/laravel-shibboleth/tree/local-sp"
             },
-            "time": "2020-08-28T21:57:16+00:00"
+            "time": "2020-08-28T22:00:50+00:00"
         },
         {
             "name": "robrichards/xmlseclibs",
