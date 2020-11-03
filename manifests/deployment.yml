@@ -1,0 +1,19 @@
+apiVersion : apps/v1
+kind: Deployment
+metadata:
+  name: umnlatisservicelater 
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: umnlatisservicelater
+  template:
+    metadata:
+      labels:
+        app: umnlatisservicelater 
+    spec:
+      containers:
+        - name: umnlatisservicelater 
+          image: latisregistry.azurecr.io/umnlatisservicelater
+          ports:
+          - containerPort: 80
