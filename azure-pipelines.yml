@@ -38,6 +38,12 @@ stages:
         tags: |
           $(tag)
     - task: KubernetesManifest@0
+      displayName: Create imagePullSecret
+      inputs:
+        action: createSecret
+        secretName: $(imagePullSecret)
+        dockerRegistryEndpoint: $(dockerRegistryServiceConnection)
+    - task: KubernetesManifest@0
       inputs:
         action: 'deploy'
         kubernetesServiceConnection: 'Rancher'
@@ -45,4 +51,6 @@ stages:
         manifests: |
           manifests/deployment.yml
           manifests/service.yml
+        imagePullSecrets: |
+          $(imagePullSecret)
         containers: $(containerRegistry)/$(imageRepository):$(tag)
