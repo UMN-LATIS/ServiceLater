@@ -43,6 +43,6 @@ stages:
         kubernetesServiceConnection: 'Rancher'
         namespace: 'cla'
         manifests: |
-          'manifests/deployment.yml'
-          'manifests/service.yml'
+          manifests/deployment.yml
+          manifests/service.yml
         containers: $(containerRegistry)/$(imageRepository):$(tag)
