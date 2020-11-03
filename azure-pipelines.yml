@@ -13,6 +13,7 @@ variables:
   dockerRegistryServiceConnection: 'b490f34e-f324-4440-bddd-bfbfbd11d3db'
   imageRepository: 'umnlatisservicelater'
   containerRegistry: 'latisregistry.azurecr.io'
+  imagePullSecret: 'LATISRegistry-1961-auth'
   dockerfilePath: 'Dockerfile'
   tag: '$(Build.BuildId)'
   
