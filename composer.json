@@ -10,11 +10,7 @@
     {
       "type": "vcs",
       "url": "https://github.com/UMN-LATIS/laravel-shibboleth"
-    },
-    {
-            "type": "vcs",
-            "url": "https://github.com/UMN-LATIS/xmlseclibs"
-        }
+    }
     ],
     "license": "MIT",
     "require": {
