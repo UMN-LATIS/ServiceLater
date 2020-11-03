@@ -42,6 +42,8 @@ stages:
       inputs:
         action: createSecret
         secretName: $(imagePullSecret)
+        kubernetesServiceConnection: 'Rancher'
+        namespace: 'cla'
         dockerRegistryEndpoint: $(dockerRegistryServiceConnection)
     - task: KubernetesManifest@0
       inputs:
