@@ -17,3 +17,6 @@ spec:
           image: latisregistry.azurecr.io/umnlatisservicelater
           ports:
           - containerPort: 80
+          securityContext:
+            allowPrivilegeEscalation: false
+            readOnlyRootFilesystem: false
