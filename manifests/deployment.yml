@@ -19,5 +19,5 @@ spec:
           - containerPort: 8080
           securityContext:
             allowPrivilegeEscalation: false
-            readOnlyRootFilesystem: true
+            readOnlyRootFilesystem: false
             runAsUser: 1000
