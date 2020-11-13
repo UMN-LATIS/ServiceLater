@@ -16,6 +16,7 @@ pool:
   vmImage: 'ubuntu-latest'
 
 variables:
+  vmImageName: 'ubuntu-latest'
   runDocker: false # 'true' or 'false' useful to skip container build if you just want to test the pipeline
   imageRepository: 'umnlatisservicelater'
   containerRegistry: 'latisregistry.azurecr.io'
@@ -32,7 +33,7 @@ parameters:
   type: object
   default:
   - dev
-  - test
+  - tst
 
 stages:
 - stage: Build

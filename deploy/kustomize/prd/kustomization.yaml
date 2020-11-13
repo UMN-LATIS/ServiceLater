@@ -1,3 +1,4 @@
+namespace: cla-svcl8tr-prd
 nameSuffix: -prd
 
 commonLabels: 
