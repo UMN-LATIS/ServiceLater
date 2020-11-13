@@ -1,0 +1,72 @@
+# The purpose of this pipeline is to manage some of the underlying dependancies the itac api has that don't change often
+# and don't need to be run during normal code changes.  This is used when moving to a new cluster and things need to be put in place
+# or a password or cert needs to be updated
+
+trigger: none
+
+pr: none
+
+pool:
+  vmImage: 'ubuntu-latest'
+
+variables:
+    imagePullSecret: 'dockerreg'
+    dockerRegistryEndpoint: 'b490f34e-f324-4440-bddd-bfbfbd11d3db' # aka Docker Service connection
+    namespaceBase: 'cla-svcl8tr'
+    azureSubscription: '<azure subscription Service Connection>' # optional if you are storing secrets in an Azure key vault
+    keyVaultName: '<AzureKeyVaultName>' # optional if you are storing secrets in an Azure key vault
+
+parameters:
+- name: listOfK8sSE
+  type: object
+  default:
+  - Rancher
+- name: listOfEnvars
+  type: object
+  default:
+  - dev
+  - tst
+
+#region Secrets
+- job: Secrets
+  steps:
+  # this first task is optional, comment it out of you don't need it
+  # - task: AzureKeyVault@1
+  #   inputs:
+  #     azureSubscription: $(azureSubscription)
+  #     KeyVaultName: $(keyVaultName)
+  #     SecretsFilter: '*'
+  #     RunAsPreJob: true
+  - ${{ each k8sSE in parameters.listOfK8sSE }}:
+    - ${{ each env in parameters.listOfEnvars }}:    
+      - task: KubernetesManifest@0
+        displayName: Create imagePullSecret
+        inputs:
+          action: createSecret
+          secretType: dockerRegistry
+          secretName: $(imagePullSecret)
+          kubernetesServiceConnection: ${{ k8sSE }}
+          namespace: $(namespaceBase)-${{ env }}
+          dockerRegistryEndpoint: $(dockerRegistryEndpoint)
+      # Just creating the imagePullSecret doesn't actually do anything, you have to patch it into the service account that does the deployment, the default is 'default'
+      - task: KubernetesManifest@0
+        displayName: Patch docker secrets into serviceaccount
+        inputs:
+          action: 'patch'
+          kubernetesServiceConnection: ${{ k8sSE }}
+          namespace: $(namespaceBase)-${{ env }}
+          resourceToPatch: 'name'
+          kind: 'sa'
+          name: 'default'
+          patch: '{"imagePullSecrets": [{"name": "$(imagePullSecret)"}]}'
+      # - task: KubernetesManifest@0
+      #   displayName: Create Optional secrets
+      #   inputs:
+      #     action: 'createSecret'
+      #     kubernetesServiceConnection: ${{ k8sSE }}
+      #     namespace: $(namespaceBase)-${{ env }}
+      #     secretType: 'generic'
+      #     secretName: 'SecA'
+      #     secretArguments: '--from-literal=SecA="$(SecA)"'
+
+#endregion

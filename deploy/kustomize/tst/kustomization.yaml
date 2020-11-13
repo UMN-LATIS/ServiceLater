@@ -1,0 +1,12 @@
+nameSuffix: -tst
+
+commonLabels: 
+  stage: tst
+
+images:
+  - name: imagename
+    newName: latisregistry.azurecr.io/umnlatisservicelater
+    newTag: latest
+
+bases:
+  - ./../base

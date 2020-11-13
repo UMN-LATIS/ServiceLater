@@ -1,0 +1,22 @@
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: unit-ingress
+  annotations:
+    kubernetes.io/ingress.class: ic-unit
+    kubernetes.io/ingress.allow-http: "false"
+    nginx.ingress.kubernetes.io/rewrite-target: /$1
+  namespace: ns
+spec:
+  tls:
+    - hosts:
+      - fqdn.umn.edu.umn.edu
+      secretName: ingress-tls
+  rules:
+    - host: fqdn.umn.edu
+      http:
+        paths:
+          - path: /?(.*)
+            backend:
+              serviceName: sn # these are the Service/ClusterIPs defined earlier
+              servicePort: 8080

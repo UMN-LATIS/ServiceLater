@@ -1,0 +1,28 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: umnlatisservicelater
+spec:
+  type: ClusterIP
+  ports:
+  - port: 8080
+    targetPort: 8080
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: umnlatisservicelater
+spec:
+  replicas: 1
+  revisionHistoryLimit: 1
+  template:
+    spec:
+      containers:
+      - name: umnlatisservicelater
+        image: imagename
+        ports:
+        - containerPort: 8080
+        securityContext:
+          allowPrivilegeEscalation: false
+          readOnlyRootFilesystem: false
+          runAsUser: 1000

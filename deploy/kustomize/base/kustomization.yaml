@@ -1,0 +1,7 @@
+namespace: <ns>
+
+commonLabels:
+  app: <appname>
+  
+resources:
+  - base.yaml
