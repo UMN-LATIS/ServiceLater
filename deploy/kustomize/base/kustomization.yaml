@@ -1,7 +1,5 @@
-namespace: <ns>
-
 commonLabels:
-  app: <appname>
+  app: umnlatisservicelater
   
 resources:
   - base.yaml
