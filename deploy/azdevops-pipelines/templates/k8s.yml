@@ -1,0 +1,15 @@
+parameters:
+- name: k8sSE
+  type: string
+- name: env
+  type: string
+
+steps:
+- task: Kubernetes@1
+  displayName: Deploy Folder to Kubernetes ${{ parameters.k8sSE }} ${{ parameters.env }}
+  inputs:
+    connectionType: 'Kubernetes Service Connection'
+    kubernetesServiceEndpoint: '${{ parameters.k8sSE }}'
+    command: 'apply'
+    arguments: '-k $(System.DefaultWorkingDirectory)/deploy/kustomize/${{ parameters.env }}'
+    outputFormat: 'yaml'

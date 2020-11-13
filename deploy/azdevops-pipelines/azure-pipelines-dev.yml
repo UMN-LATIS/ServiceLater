@@ -1,0 +1,72 @@
+# Gradle 
+
+# Build your Java project and run tests with Gradle using a Gradle wrapper script.
+# Add steps that analyze code, save build artifacts, deploy, and more:
+# https://docs.microsoft.com/azure/devops/pipelines/languages/java 
+
+trigger:
+  branches:
+    include:
+      - dev/*
+      - test/*
+
+pr: none
+
+pool:
+  vmImage: 'ubuntu-latest'
+
+variables:
+  runDocker: false # 'true' or 'false' useful to skip container build if you just want to test the pipeline
+  imageRepository: 'umnlatisservicelater'
+  containerRegistry: 'latisregistry.azurecr.io'
+  dockerRegistryServiceConnection: 'b490f34e-f324-4440-bddd-bfbfbd11d3db'
+  dockerfilePath: '**/Dockerfile'
+  tag: '$(Build.BuildId)'
+
+parameters:
+- name: listOfK8sSE
+  type: object
+  default:
+  - Rancher
+- name: listOfEnvars
+  type: object
+  default:
+  - dev
+  - test
+
+stages:
+- stage: Build
+  displayName: Build stage
+  jobs:  
+  - job: Build
+    displayName: Build
+    pool:
+      vmImage: $(vmImageName)
+    steps:
+    - task: Docker@2
+      displayName: Build and push an image to container registry
+      condition: eq('${{ variables.runDocker }}', 'true')
+      inputs:
+        command: buildAndPush
+        repository: $(imageRepository)
+        dockerfile: $(dockerfilePath)
+        containerRegistry: $(dockerRegistryServiceConnection)
+        tags: |
+          $(tag)    
+    - task: Anchore@0
+      condition: eq('${{ variables.runDocker }}', 'true')
+      inputs:
+        image: "$(containerRegistry)/$(imageRepository):$(tag)"
+        dockerfile: Dockerfile
+        failBuild: true
+
+  - job: Clusters
+    dependsOn: build
+    steps:
+    - ${{ each k8sSE in parameters.listOfK8sSE }}:
+      - ${{ each env in parameters.listOfEnvars }}:
+        - template: templates/k8s.yml
+          parameters:
+              k8sSE: ${{ k8sSE }}
+              env: ${{ env }}
+
