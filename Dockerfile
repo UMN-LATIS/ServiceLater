@@ -49,3 +49,6 @@ RUN apt-get update && apt-get install -y \
 COPY . /var/www/html
 
 RUN chmod -R 777 /var/www/html/storage/
+
+COPY runscript.sh /var/www/html
+CMD ["sh", "runscript.sh"]
