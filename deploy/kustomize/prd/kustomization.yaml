@@ -9,5 +9,8 @@ images:
     newName: latisregistry.azurecr.io/umnlatisservicelater
     newTag: latest
 
+resources:
+  - configmap.yaml
+
 bases:
   - ./../base

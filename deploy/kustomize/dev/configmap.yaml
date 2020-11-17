@@ -1,0 +1,11 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: itac-api
+  labels: 
+    app: itac-api
+data:
+  SQL_DB: 'dba_itac_dev'
+  SQL_SERVER: 'mysql-dev3.oit.umn.edu'
+  GROUPER_STEM: 'umntest:itac'
+  GROUPER_URI: 'https://grouper-test.umn.edu/grouper-ws/servicesRest/v2_4_000'
