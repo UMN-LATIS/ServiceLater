@@ -18,5 +18,5 @@ spec:
         paths:
           - path: /?(.*)
             backend:
-              serviceName: umnlatisservicelater
+              serviceName: umnlatisservicelater-dev
               servicePort: 8080
