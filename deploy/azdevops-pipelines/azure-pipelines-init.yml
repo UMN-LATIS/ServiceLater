@@ -61,22 +61,15 @@ jobs:
           name: 'default'
           patch: '{"imagePullSecrets": [{"name": "$(imagePullSecret)"}]}'
       - task: KubernetesManifest@0
-        displayName: Create DB password
+        displayName: Create secrets
         inputs:
           action: 'createSecret'
           kubernetesServiceConnection: ${{ k8sSE }}
           namespace: $(namespaceBase)-${{ env }}
           secretType: 'generic'
-          secretName: '${{ env }}-db-password'
-          secretArguments: '--from-literal=DB_PASSWORD="${{ env }}-dbpassword"'
-      - task: KubernetesManifest@0
-        displayName: Create Shib Key
-        inputs:
-          action: 'createSecret'
-          kubernetesServiceConnection: ${{ k8sSE }}
-          namespace: $(namespaceBase)-${{ env }}
-          secretType: 'generic'
-          secretName: '${{ env }}-shib-key'
-          secretArguments: '--from-literal=SHIB_PRIVATE_KEY="${{ env }}-shibkey"'
+          secretName: '${{ env }}-secrets'
+          secretArguments: 
+            - '--from-literal=SHIB_PRIVATE_KEY="${{ env }}-shibkey"'
+            - '--from-literal=DB_PASSWORD="${{ env }}-dbpassword"'
 
 #endregion
