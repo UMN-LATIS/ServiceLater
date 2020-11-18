@@ -1,0 +1,14 @@
+kind: ConfigMap 
+apiVersion: v1 
+metadata:
+  name: svclater-configmap 
+data:
+  DB_HOST: servicelaterdatabase.mysql.database.azure.com
+  DB_DATABASE: svclater
+  DB_USERNAME: svclater@servicelaterdatabase
+  APP_URL: ""
+  SHIB_EMULATE: "false"
+  SHIB_ENTITY_ID: https://servicelater.cla.umn.edu/shibboleth/default
+  SHIB_IDP_ENTITY: https://idp2.shib.umn.edu/idp/shibboleth
+  SHIB_IDP_SSO: https://login.umn.edu/idp/profile/SAML2/Redirect/SSO
+  SHIB_IDP_SLO: https://login.umn.edu/idp/profile/SAML2/Redirect/SLO
