@@ -17,7 +17,7 @@ pool:
 
 variables:
   vmImageName: 'ubuntu-latest'
-  runDocker: true # 'true' or 'false' useful to skip container build if you just want to test the pipeline
+  runDocker: false # 'true' or 'false' useful to skip container build if you just want to test the pipeline
   imageRepository: 'umnlatisservicelater'
   containerRegistry: 'latisregistry.azurecr.io'
   dockerRegistryServiceConnection: 'b490f34e-f324-4440-bddd-bfbfbd11d3db'
@@ -59,7 +59,7 @@ stages:
       inputs:
         image: "$(containerRegistry)/$(imageRepository):$(tag)"
         dockerfile: Dockerfile
-        failBuild: true
+        failBuild: false
 
   - job: Clusters
     dependsOn: build
