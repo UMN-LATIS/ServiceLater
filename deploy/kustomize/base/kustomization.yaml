@@ -1,5 +1,8 @@
 commonLabels:
   app: umnlatisservicelater
-  
+
+resources:
+  - configmap.yaml
+
 resources:
   - base.yaml
