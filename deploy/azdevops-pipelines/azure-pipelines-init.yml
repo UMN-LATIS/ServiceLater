@@ -13,8 +13,8 @@ variables:
     imagePullSecret: 'dockerreg'
     dockerRegistryEndpoint: 'b490f34e-f324-4440-bddd-bfbfbd11d3db' # aka Docker Service connection
     namespaceBase: 'cla-svcl8tr'
-    azureSubscription: '<azure subscription Service Connection>' # optional if you are storing secrets in an Azure key vault
-    keyVaultName: '<AzureKeyVaultName>' # optional if you are storing secrets in an Azure key vault
+    azureSubscription: 'ARM' # optional if you are storing secrets in an Azure key vault
+    keyVaultName: 'svclaterkv' # optional if you are storing secrets in an Azure key vault
 
 parameters:
 - name: listOfK8sSE
