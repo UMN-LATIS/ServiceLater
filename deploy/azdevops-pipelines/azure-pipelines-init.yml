@@ -67,7 +67,7 @@ jobs:
           kubernetesServiceConnection: ${{ k8sSE }}
           namespace: $(namespaceBase)-${{ env }}
           secretType: 'generic'
-          secretName: '${{ env }}-secrets'
+          secretName: 'secrets'
           secretArguments: '--from-literal=SHIB_PRIVATE_KEY="${{ env }}-shibkey" --from-literal=DB_PASSWORD="${{ env }}-dbpassword"'
 
 #endregion
