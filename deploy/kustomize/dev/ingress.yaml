@@ -1,13 +1,7 @@
 apiVersion: extensions/v1beta1
 kind: Ingress
 metadata:
-  name: cla-ingress-svcl8tr-dev
-  annotations:
-    kubernetes.io/ingress.class: cla-ic
-    kubernetes.io/ingress.allow-http: "false"
-    nginx.ingress.kubernetes.io/rewrite-target: /$1
-    cert-manager.io/cluster-issuer: ci-cla
-  namespace: cla-svcl8tr-dev
+  name: cla-ingress-svcl8tr
 spec:
   tls:
     - hosts:
