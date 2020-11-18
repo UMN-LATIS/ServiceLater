@@ -14,7 +14,3 @@ resources:
 
 bases:
   - ./../base
-
-resources:
-  - configmap.yaml
-

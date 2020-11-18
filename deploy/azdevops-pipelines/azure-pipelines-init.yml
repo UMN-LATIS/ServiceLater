@@ -32,12 +32,12 @@ jobs:
 - job: Secrets
   steps:
   # this first task is optional, comment it out of you don't need it
-  # - task: AzureKeyVault@1
-  #   inputs:
-  #     azureSubscription: $(azureSubscription)
-  #     KeyVaultName: $(keyVaultName)
-  #     SecretsFilter: '*'
-  #     RunAsPreJob: true
+  - task: AzureKeyVault@1
+    inputs:
+      azureSubscription: $(azureSubscription)
+      KeyVaultName: $(keyVaultName)
+      SecretsFilter: '${{ env }}-*'
+      RunAsPreJob: true
   - ${{ each k8sSE in parameters.listOfK8sSE }}:
     - ${{ each env in parameters.listOfEnvars }}:    
       - task: KubernetesManifest@0
@@ -60,14 +60,23 @@ jobs:
           kind: 'sa'
           name: 'default'
           patch: '{"imagePullSecrets": [{"name": "$(imagePullSecret)"}]}'
-      # - task: KubernetesManifest@0
-      #   displayName: Create Optional secrets
-      #   inputs:
-      #     action: 'createSecret'
-      #     kubernetesServiceConnection: ${{ k8sSE }}
-      #     namespace: $(namespaceBase)-${{ env }}
-      #     secretType: 'generic'
-      #     secretName: 'SecA'
-      #     secretArguments: '--from-literal=SecA="$(SecA)"'
+      - task: KubernetesManifest@0
+        displayName: Create DB password
+        inputs:
+          action: 'createSecret'
+          kubernetesServiceConnection: ${{ k8sSE }}
+          namespace: $(namespaceBase)-${{ env }}
+          secretType: 'generic'
+          secretName: '${{ env }}-db_password'
+          secretArguments: '--from-literal=DB_PASSWORD="${{ env }}-dbpassword"'
+      - task: KubernetesManifest@0
+        displayName: Create Shib Key
+        inputs:
+          action: 'createSecret'
+          kubernetesServiceConnection: ${{ k8sSE }}
+          namespace: $(namespaceBase)-${{ env }}
+          secretType: 'generic'
+          secretName: '${{ env }}-shib_key'
+          secretArguments: '--from-literal=SHIB_PRIVATE_KEY="${{ env }}-shibkey"'
 
 #endregion

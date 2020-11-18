@@ -3,6 +3,4 @@ commonLabels:
 
 resources:
   - configmap.yaml
-
-resources:
-  - base.yaml
+    base.yaml

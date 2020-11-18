@@ -7,8 +7,8 @@
 trigger:
   branches:
     include:
-      - dev/*
-      - test/*
+      - feature/*
+      - develop
 
 pr: none
 
