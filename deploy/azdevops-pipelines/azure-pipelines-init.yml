@@ -38,7 +38,7 @@ jobs:
         inputs:
           azureSubscription: $(azureSubscription)
           KeyVaultName: $(keyVaultName)
-          SecretsFilter: '${{ env }}-*'
+          SecretsFilter: '*'
           RunAsPreJob: true  
       - task: KubernetesManifest@0
         displayName: Create imagePullSecret
