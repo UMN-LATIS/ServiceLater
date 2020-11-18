@@ -1,7 +1,7 @@
 apiVersion: v1
 kind: ConfigMap
 metadata:
-  name: umnlatisservicelater
+  name: umnlatisservicelater-configmap
   labels: 
     app: umnlatisservicelater
 data:
