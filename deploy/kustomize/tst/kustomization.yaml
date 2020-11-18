@@ -9,7 +9,7 @@ images:
     newName: latisregistry.azurecr.io/umnlatisservicelater
     newTag: '91'
 
-resources:
+patchesStrategicMerge:
   - configmap.yaml
 
 bases:
