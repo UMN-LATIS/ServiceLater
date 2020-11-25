@@ -17,7 +17,7 @@ pool:
 
 variables:
   vmImageName: 'ubuntu-latest'
-  runDocker: true # 'false' or 'false' useful to skip container build if you just want to test the pipeline
+  runDocker: false # 'false' or 'false' useful to skip container build if you just want to test the pipeline
   imageRepository: 'umnlatisservicelater'
   containerRegistry: 'latisregistry.azurecr.io'
   dockerRegistryServiceConnection: 'b490f34e-f324-4440-bddd-bfbfbd11d3db'
@@ -66,6 +66,9 @@ stages:
     steps:
     - ${{ each k8sSE in parameters.listOfK8sSE }}:
       - ${{ each env in parameters.listOfEnvars }}:
+        - script: dir
+          workingDirectory: $(System.DefaultWorkingDirectory)/deploy/kustomize/${{ env }}
+          displayName: Update kustomize image tag $(tag)
         - template: templates/k8s.yml
           parameters:
               k8sSE: ${{ k8sSE }}
