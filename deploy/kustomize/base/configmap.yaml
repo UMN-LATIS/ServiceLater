@@ -5,4 +5,4 @@ metadata:
   labels: 
     app: umnlatisservicelater
 data:
-  UniveralThing: ''
+  UniveralThing: 'a'
