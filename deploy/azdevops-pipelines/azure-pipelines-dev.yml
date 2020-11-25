@@ -68,7 +68,7 @@ stages:
       - script: kustomize edit set image imagename=latisregistry.azurecr.io/umnlatisservicelater:$(tag)
         workingDirectory: $(System.DefaultWorkingDirectory)/deploy/kustomize/${{ env }}
         displayName: Update kustomize image tag $(tag)
-      - script: cat $kustomization.yaml
+      - script: cat kustomization.yaml
         workingDirectory: $(System.DefaultWorkingDirectory)/deploy/kustomize/${{ env }}
       - ${{ each k8sSE in parameters.listOfK8sSE }}:       
         - template: templates/k8s.yml
