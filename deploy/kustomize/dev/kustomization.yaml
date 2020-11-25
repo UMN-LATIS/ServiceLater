@@ -7,7 +7,7 @@ commonLabels:
 images:
   - name: imagename
     newName: latisregistry.azurecr.io/umnlatisservicelater
-    newTag: '133'
+    newTag: '134'
 
 patchesStrategicMerge:
   - configmap.yaml
