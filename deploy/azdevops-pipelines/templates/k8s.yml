@@ -12,4 +12,5 @@ steps:
     kubernetesServiceEndpoint: '${{ parameters.k8sSE }}'
     command: 'apply'
     arguments: '-k $(System.DefaultWorkingDirectory)/deploy/kustomize/${{ parameters.env }}'
+    cwd: $(System.DefaultWorkingDirectory)
     outputFormat: 'yaml'
