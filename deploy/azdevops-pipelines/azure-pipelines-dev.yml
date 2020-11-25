@@ -70,6 +70,7 @@ stages:
         displayName: Update kustomize image tag $(tag)
       - script: cat kustomization.yaml
         workingDirectory: $(System.DefaultWorkingDirectory)/deploy/kustomize/${{ env }}
+      - script: cd $(System.DefaultWorkingDirectory)
       - ${{ each k8sSE in parameters.listOfK8sSE }}:       
         - template: templates/k8s.yml
           parameters:
