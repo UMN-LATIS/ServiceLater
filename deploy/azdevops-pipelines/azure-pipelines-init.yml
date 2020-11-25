@@ -15,6 +15,8 @@ variables:
     namespaceBase: 'cla-svcl8tr'
     azureSubscription: 'ARM' # optional if you are storing secrets in an Azure key vault
     keyVaultName: 'svclaterkv' # optional if you are storing secrets in an Azure key vault
+    shibkey: ${{ env }}-shibkey
+    dbPassword: ${{ env }}-db-password
 
 parameters:
 - name: listOfK8sSE
@@ -68,6 +70,6 @@ jobs:
           namespace: $(namespaceBase)-${{ env }}
           secretType: 'generic'
           secretName: 'secrets'
-          secretArguments: '--from-literal=SHIB_PRIVATE_KEY="$(${{ env }}-shibkey)" --from-literal=DB_PASSWORD="$(${{ env }}-db-password)"
+          secretArguments: '--from-literal=SHIB_PRIVATE_KEY="$(shibkey)" --from-literal=DB_PASSWORD="$(dbPassword)"
 
 #endregion
