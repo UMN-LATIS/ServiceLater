@@ -64,11 +64,11 @@ stages:
   - job: Clusters
     dependsOn: build
     steps:
-    - ${{ each k8sSE in parameters.listOfK8sSE }}:
-      - ${{ each env in parameters.listOfEnvars }}:
-        - script: dir
-          workingDirectory: $(System.DefaultWorkingDirectory)/deploy/kustomize/${{ env }}
-          displayName: Update kustomize image tag $(tag)
+    - ${{ each env in parameters.listOfEnvars }}:
+      - script: kustomize edit set image imagename=latisregistry.azurecr.io/umnlatisservicelater:$(tag)
+        workingDirectory: $(System.DefaultWorkingDirectory)/deploy/kustomize/${{ env }}
+        displayName: Update kustomize image tag $(tag)
+      - ${{ each k8sSE in parameters.listOfK8sSE }}:       
         - template: templates/k8s.yml
           parameters:
               k8sSE: ${{ k8sSE }}
