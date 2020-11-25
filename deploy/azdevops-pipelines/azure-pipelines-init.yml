@@ -70,6 +70,6 @@ jobs:
           namespace: $(namespaceBase)-${{ env }}
           secretType: 'generic'
           secretName: 'secrets'
-          secretArguments: '--from-literal=SHIB_PRIVATE_KEY="$(shibkey)" --from-literal=DB_PASSWORD="$(dbPassword)"
+          secretArguments: '--from-literal="SHIB_PRIVATE_KEY=$(shibkey)" --from-literal="DB_PASSWORD=$(dbPassword)"
 
 #endregion
