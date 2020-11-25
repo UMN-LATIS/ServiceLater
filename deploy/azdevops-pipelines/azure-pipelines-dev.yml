@@ -33,7 +33,7 @@ parameters:
   type: object
   default:
   - dev
-  # - tst
+  - tst
 
 stages:
 - stage: Build
