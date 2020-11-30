@@ -66,10 +66,10 @@ stages:
     steps:
     - ${{ each env in parameters.listOfEnvars }}:
       - script: kustomize version
-      - script: cd $(System.DefaultWorkingDirectory)/deploy/kustomize/${{ env }}
+      - script: cd deploy/kustomize/${{ env }}
       - script: pwd
       - script: kustomize edit set image imagename=latisregistry.azurecr.io/umnlatisservicelater:$(tag)
-        workingDirectory: .
+        workingDirectory: deploy/kustomize/${{ env }}
         displayName: Update kustomize image tag $(tag)
       - script: cat kustomization.yaml
         workingDirectory: $(System.DefaultWorkingDirectory)/deploy/kustomize/${{ env }}
