@@ -11,6 +11,5 @@ steps:
     connectionType: 'Kubernetes Service Connection'
     kubernetesServiceEndpoint: '${{ parameters.k8sSE }}'
     command: 'apply'
-    #arguments: '-k $(System.DefaultWorkingDirectory)/deploy/kustomize/${{ parameters.env }}'
-    arguments: '-f - $(kustomize build $(System.DefaultWorkingDirectory)/deploy/kustomize/${{ parameters.env }})'
+    arguments: '-f $(System.DefaultWorkingDirectory)/deploy/k2/${{ env }}.yml'
     outputFormat: 'yaml'

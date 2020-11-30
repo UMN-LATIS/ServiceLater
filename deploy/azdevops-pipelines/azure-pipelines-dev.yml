@@ -65,12 +65,13 @@ stages:
     dependsOn: build
     steps:
     - ${{ each env in parameters.listOfEnvars }}:
-      - script: kustomize version
-      - script: pwd
       - script: kustomize edit set image imagename=latisregistry.azurecr.io/umnlatisservicelater:$(tag)
-        workingDirectory: deploy/kustomize/${{ env }}
+        workingDirectory: $(System.DefaultWorkingDirectory)/deploy/kustomize/${{ env }}
         displayName: Update kustomize image tag $(tag)
-      - script: cat kustomization.yaml
+      - script: kustomize build > $(System.DefaultWorkingDirectory)/deploy/k2/${{ env }}.yml
+        workingDirectory: $(System.DefaultWorkingDirectory)/deploy/kustomize/${{ env }}
+        displayName: Build kustomize outputfiles
+      - script: cat $(System.DefaultWorkingDirectory)/deploy/k2/${{ env }}.yml
         workingDirectory: $(System.DefaultWorkingDirectory)/deploy/kustomize/${{ env }}
       - ${{ each k8sSE in parameters.listOfK8sSE }}:       
         - template: templates/k8s.yml
