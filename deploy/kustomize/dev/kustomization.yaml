@@ -1,20 +1,15 @@
 apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
-
 namespace: cla-svcl8tr-dev
 nameSuffix: -dev
-
-commonLabels: 
+commonLabels:
   stage: dev
-
 images:
-  - name: imagename
-    newName: latisregistry.azurecr.io/umnlatisservicelater
-    newTag: '155'
-
+- name: imagename
+  newName: latisregistry.azurecr.io/umnlatisservicelater
+  newTag: "3214"
 patchesStrategicMerge:
-  - configmap.yaml
-  - ingress.yaml
-
-bases:
-  - ./../base
+- configmap.yaml
+- ingress.yaml
+resources:
+- ./../base
