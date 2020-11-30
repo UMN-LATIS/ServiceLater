@@ -11,5 +11,5 @@ steps:
     connectionType: 'Kubernetes Service Connection'
     kubernetesServiceEndpoint: '${{ parameters.k8sSE }}'
     command: 'apply'
-    arguments: '-f $(System.DefaultWorkingDirectory)/deploy/k2/${{ env }}.yml'
+    arguments: '-f $(System.DefaultWorkingDirectory)/deploy/k2/${{ parameters.env }}.yml'
     outputFormat: 'yaml'
