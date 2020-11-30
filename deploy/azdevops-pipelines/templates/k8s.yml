@@ -5,8 +5,6 @@ parameters:
   type: string
 
 steps:
-- script: pwd
-- script: ls
 - task: Kubernetes@1
   displayName: Deploy Folder to Kubernetes ${{ parameters.k8sSE }} ${{ parameters.env }}
   inputs:
