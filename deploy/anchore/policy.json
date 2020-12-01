@@ -5,10 +5,10 @@
     "comment": "My system's default bundle",
     "whitelisted_images": [
         {
-          "name": "Whitelistphp",
-          "registry": "docker.io",
-          "repository": "php",
-          "image": { "type": "tag", "value": "7.4-apache" }
+          "name": "Whitelist",
+          "registry": "latisregistry.azurecr.io",
+          "repository": "umnlatisservicelater",
+          "image": { "type": "tag", "value": "*" }
         }
       ],
     "mappings": [
