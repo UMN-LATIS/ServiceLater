@@ -1,0 +1,17 @@
+{
+    "id": "default0",
+    "version": "1_0",
+    "name": "My Default bundle",
+    "comment": "My system's default bundle",
+    "whitelists": [
+        {
+          "id": "whitelist1",
+          "name": "Simple Whitelist",
+          "version": "1_0",
+          "items": [
+            { "id": "item1", "gate": "vulnerabilities", "trigger": "package", "trigger_id": "CVE-2003-1+*" },
+            { "id": "item2", "gate": "vulnerabilities", "trigger": "package", "trigger_id": "CVE-10001+*" }
+          ]
+        }
+    ]
+  }
