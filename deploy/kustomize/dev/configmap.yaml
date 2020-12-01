@@ -9,6 +9,7 @@ data:
   DB_DATABASE: svclater
   DB_USERNAME: svclater@servicelaterdatabase
   APP_URL: "https://srvcl8tr-dev.eastus.cloudapp.azure.com"
+  SHIB_SP_TYPE: "local_shib"
   SHIB_EMULATE: "false"
   SHIB_ENTITY_ID: https://servicelater.cla.umn.edu/shibboleth/default
   SHIB_IDP_ENTITY: https://idp2.shib.umn.edu/idp/shibboleth
