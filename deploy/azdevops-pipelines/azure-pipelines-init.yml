@@ -60,9 +60,8 @@ jobs:
           kind: 'sa'
           name: 'default'
           patch: '{"imagePullSecrets": [{"name": "$(imagePullSecret)"}]}'
-      - task: CmdLine@2
-        inputs:
-          script: 'echo $(${{ env }}-shib-key) | awk \'{gsub(/\\n/,"\n")}1\' > privateKey' 
+      - script: echo $privateKey | awk '{gsub(/\\n/,"\n")}1' > privateKey
+        env: { privateKey: "$(${{ env }}-shib-key)" } # mapping of environment variables to add
       - task: KubernetesManifest@0
         displayName: Create secrets
         inputs:
