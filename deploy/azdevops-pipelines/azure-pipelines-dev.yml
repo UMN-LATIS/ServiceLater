@@ -18,7 +18,7 @@ pool:
 
 variables:
   vmImageName: 'ubuntu-latest'
-  runDocker: true # 'true' or 'false' useful to skip container build if you just want to test the pipeline
+  runDocker: false # 'true' or 'false' useful to skip container build if you just want to test the pipeline
   imageRepository: 'umnlatisservicelater'
   containerRegistry: 'latisregistry.azurecr.io'
   dockerRegistryServiceConnection: 'b490f34e-f324-4440-bddd-bfbfbd11d3db'
@@ -55,11 +55,30 @@ stages:
         containerRegistry: $(dockerRegistryServiceConnection)
         tags: |
           $(tag)
-    #- script: cat '$(System.DefaultWorkingDirectory)/deploy/anchore/policy.json'
     - task: Anchore@0
       condition: eq('${{ variables.runDocker }}', 'true')
       inputs:
         image: "$(containerRegistry)/$(imageRepository):$(tag)"
+        dockerfile: Dockerfile
+        failBuild: false
+        customPolicyPath: '$(System.DefaultWorkingDirectory)/deploy/anchore/policy.json'
+  
+  - job: Just scan
+    displayName: Just scan
+    condition: eq('${{ variables.runDocker }}', 'false')
+    pool:
+      vmImage: $(vmImageName)
+    steps:
+    - task: Docker@2
+      displayName: Pull container if skipping build
+      inputs:
+        command: pull
+        arguments: "$(containerRegistry)/$(imageRepository):177"
+        containerRegistry: $(dockerRegistryServiceConnection)
+        addPipelineData: false
+    - task: Anchore@0
+      inputs:
+        image: "$(containerRegistry)/$(imageRepository):177"
         dockerfile: Dockerfile
         failBuild: false
         customPolicyPath: '$(System.DefaultWorkingDirectory)/deploy/anchore/policy.json'
