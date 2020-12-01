@@ -60,6 +60,7 @@ stages:
         image: "$(containerRegistry)/$(imageRepository):$(tag)"
         dockerfile: Dockerfile
         failBuild: false
+        customPolicyPath: '$(System.DefaultWorkingDirectory)/deploy/anchore/policy.json'
 
   - job: Clusters
     dependsOn: build
