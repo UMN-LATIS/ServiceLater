@@ -63,7 +63,7 @@ stages:
         failBuild: false
         customPolicyPath: '$(System.DefaultWorkingDirectory)/deploy/anchore/policy.json'
   
-  - job: Just scan
+  - job: Just_scan
     displayName: Just scan
     condition: eq('${{ variables.runDocker }}', 'false')
     pool:
