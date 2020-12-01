@@ -6,7 +6,7 @@
     "whitelisted_images": [
         {
           "name": "Whitelist",
-          "registry": "latisregistry.azurecr.io",
+          "registry": "*",
           "repository": "umnlatisservicelater",
           "image": { "type": "tag", "value": "*" }
         }
@@ -27,7 +27,7 @@
           "name": "Simple Whitelist",
           "version": "1_0",
           "items": [
-            { "id": "item1", "gate": "vulnerabilities", "trigger": "package", "trigger_id": "CVE-2003-1+*" }
+            { "id": "item1", "gate": "vulnerabilities", "trigger": "package", "trigger_id": "CVE-+*" }
           ]
         }
     ],
