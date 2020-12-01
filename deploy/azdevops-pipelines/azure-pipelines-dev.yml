@@ -9,6 +9,7 @@ trigger:
     include:
       - feature/*
       - develop
+      - pipeline/*
 
 pr: none
 
@@ -54,11 +55,11 @@ stages:
         containerRegistry: $(dockerRegistryServiceConnection)
         tags: |
           $(tag)
-    - script: cat '$(System.DefaultWorkingDirectory)/deploy/anchore/policy.json'
+    #- script: cat '$(System.DefaultWorkingDirectory)/deploy/anchore/policy.json'
     - task: Anchore@0
       condition: eq('${{ variables.runDocker }}', 'true')
       inputs:
-        image: "$(containerRegistry)/$(imageRepository):177"
+        image: "$(containerRegistry)/$(imageRepository):$(tag)"
         dockerfile: Dockerfile
         failBuild: false
         customPolicyPath: '$(System.DefaultWorkingDirectory)/deploy/anchore/policy.json'
