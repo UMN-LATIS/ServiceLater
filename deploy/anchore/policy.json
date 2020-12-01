@@ -19,7 +19,8 @@
           "name": "Simple Whitelist",
           "version": "1_0",
           "items": [
-            { "id": "item1", "gate": "vulnerabilities", "trigger": "package", "trigger_id": "CVE-+*" }
+            { "id": "item1", "gate": "vulnerabilities", "trigger": "package", "trigger_id": "CVE-2019-15794" },
+            { "id": "item2", "gate": "vulnerabilities", "trigger": "package", "trigger_id": "*" }
           ]
         }
     ],

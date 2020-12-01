@@ -83,8 +83,6 @@ stages:
         dockerfile: Dockerfile
         failBuild: false
         customPolicyPath: '$(System.DefaultWorkingDirectory)/deploy/anchore/policy.json'
-    - script: cat /home/vsts/work/1/s/anchore-reports/umnlatisservicelater_177-content-os.json
-    - script: cat /home/vsts/work/1/s/anchore-reports/umnlatisservicelater_177-details.json
     - script: cat /home/vsts/work/1/s/anchore-reports/umnlatisservicelater_177-policy.json
 
   - job: Clusters
