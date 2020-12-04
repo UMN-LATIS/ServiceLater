@@ -23,7 +23,8 @@ variables:
   containerRegistry: 'latisregistry.azurecr.io'
   dockerRegistryServiceConnection: 'b490f34e-f324-4440-bddd-bfbfbd11d3db'
   dockerfilePath: '**/Dockerfile'
-  tag: '$(Build.BuildId)'
+  #tag: '$(Build.BuildId)'
+  tag: '204'
 
 parameters:
 - name: listOfK8sSE
@@ -86,7 +87,7 @@ stages:
     - script: cat /home/vsts/work/1/s/anchore-reports/umnlatisservicelater_177-policy.json
 
   - job: Clusters
-    dependsOn: build
+    #dependsOn: build
     steps:
     - ${{ each env in parameters.listOfEnvars }}:
       - script: kustomize edit set image imagename=latisregistry.azurecr.io/umnlatisservicelater:$(tag)
