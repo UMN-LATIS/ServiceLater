@@ -8,9 +8,9 @@ data:
   DB_HOST: servicelaterdatabase.mysql.database.azure.com
   DB_DATABASE: svclater
   DB_USERNAME: svclater@servicelaterdatabase
-  APP_URL: "https://srvcl8tr-dev.eastus.cloudapp.azure.com"
-  SHIB_ASSERTION_CONSUMER_URL: "https://srvcl8tr-dev.eastus.cloudapp.azure.com/local-sp/ACS"
-  SHIB_LOGOUT_SERVICE_URL: "https://srvcl8tr-dev.eastus.cloudapp.azure.com/Logout"
+  APP_URL: "https://srvcl8tr-dev.k8s.latis.umn.edu"
+  SHIB_ASSERTION_CONSUMER_URL: "https://srvcl8tr-dev.k8s.latis.umn.edu/local-sp/ACS"
+  SHIB_LOGOUT_SERVICE_URL: "https://srvcl8tr-dev.k8s.latis.umn.edu/Logout"
   SHIB_SP_TYPE: "local_shib"
   SHIB_EMULATE: "false"
   SHIB_ENTITY_ID: https://servicelater.cla.umn.edu/shibboleth/default

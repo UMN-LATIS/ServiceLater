@@ -3,10 +3,10 @@ kind: Ingress
 metadata:
   name: cla-ingress-svcl8tr
   annotations:
-    kubernetes.io/ingress.class: cla-ic
+    kubernetes.io/ingress.class: nginx
     kubernetes.io/ingress.allow-http: "false"
     nginx.ingress.kubernetes.io/rewrite-target: /$1
-    cert-manager.io/cluster-issuer: ci-cla
+    cert-manager.io/cluster-issuer: cluster-issuer
 spec:
   tls:
   rules:
