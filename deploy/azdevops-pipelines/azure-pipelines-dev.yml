@@ -18,13 +18,12 @@ pool:
 
 variables:
   vmImageName: 'ubuntu-latest'
-  runDocker: false # 'true' or 'false' useful to skip container build if you just want to test the pipeline
+  runDocker: true # 'true' or 'false' useful to skip container build if you just want to test the pipeline
   imageRepository: 'umnlatisservicelater'
   containerRegistry: 'latisregistry.azurecr.io'
   dockerRegistryServiceConnection: 'b490f34e-f324-4440-bddd-bfbfbd11d3db'
   dockerfilePath: '**/Dockerfile'
-  #tag: '$(Build.BuildId)'
-  tag: '204'
+  tag: '$(Build.BuildId)'
 
 parameters:
 - name: listOfK8sSE
@@ -43,7 +42,6 @@ stages:
   jobs:  
   - job: Build
     displayName: Build
-    condition: eq('${{ variables.runDocker }}', 'true')
     pool:
       vmImage: $(vmImageName)
     steps:
@@ -57,6 +55,7 @@ stages:
         containerRegistry: $(dockerRegistryServiceConnection)
         tags: |
           $(tag)
+    #- script: cat '$(System.DefaultWorkingDirectory)/deploy/anchore/policy.json'
     - task: Anchore@0
       condition: eq('${{ variables.runDocker }}', 'true')
       inputs:
@@ -64,30 +63,9 @@ stages:
         dockerfile: Dockerfile
         failBuild: false
         customPolicyPath: '$(System.DefaultWorkingDirectory)/deploy/anchore/policy.json'
-  
-  - job: Just_scan
-    displayName: Just scan
-    condition: eq('${{ variables.runDocker }}', 'false')
-    pool:
-      vmImage: $(vmImageName)
-    steps:
-    - task: Docker@2
-      displayName: Pull container if skipping build
-      inputs:
-        command: pull
-        arguments: "$(containerRegistry)/$(imageRepository):177"
-        containerRegistry: $(dockerRegistryServiceConnection)
-        addPipelineData: false
-    - task: Anchore@0
-      inputs:
-        image: "$(containerRegistry)/$(imageRepository):177"
-        dockerfile: Dockerfile
-        failBuild: false
-        customPolicyPath: '$(System.DefaultWorkingDirectory)/deploy/anchore/policy.json'
-    - script: cat /home/vsts/work/1/s/anchore-reports/umnlatisservicelater_177-policy.json
 
   - job: Clusters
-    #dependsOn: build
+    dependsOn: build
     steps:
     - ${{ each env in parameters.listOfEnvars }}:
       - script: kustomize edit set image imagename=latisregistry.azurecr.io/umnlatisservicelater:$(tag)
@@ -101,4 +79,3 @@ stages:
           parameters:
               k8sSE: ${{ k8sSE }}
               env: ${{ env }}
-
