@@ -60,6 +60,8 @@ jobs:
           kind: 'sa'
           name: 'default'
           patch: '{"imagePullSecrets": [{"name": "$(imagePullSecret)"}]}'
+      - script: echo $privateKey | awk '{gsub(/\\n/,"\n")}1' > privateKey
+        env: { privateKey: "$(${{ env }}-shib-key)" } # mapping of environment variables to add
       - task: KubernetesManifest@0
         displayName: Create secrets
         inputs:
@@ -68,6 +70,6 @@ jobs:
           namespace: $(namespaceBase)-${{ env }}
           secretType: 'generic'
           secretName: 'secrets'
-          secretArguments: '--from-literal="APP_KEY=$(app-key)" --from-literal="SHIB_PRIVATE_KEY=$(${{ env }}-shib-key)" --from-literal="DB_PASSWORD=$(${{ env }}-db-password)"'
+          secretArguments: '--from-literal="APP_KEY=$(app-key)" --from-file="SHIB_PRIVATE_KEY=privateKey" --from-literal="DB_PASSWORD=$(${{ env }}-db-password)"'
 
 #endregion
