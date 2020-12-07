@@ -5,10 +5,10 @@ metadata:
 spec:
   tls:
     - hosts:
-      - srvcl8tr-dev.eastus.cloudapp.azure.com
+      - srvcl8tr-dev.k8s.latis.umn.edu
       secretName: ingress-tls
   rules:
-    - host: srvcl8tr-dev.eastus.cloudapp.azure.com
+    - host: srvcl8tr-dev.k8s.latis.umn.edu
       http:
         paths:
           - path: /?(.*)
