@@ -15,3 +15,17 @@ spec:
             backend:
               serviceName: umnlatisservicelater-dev
               servicePort: 8080
+---
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: cla-ingress2-svcl8tr
+spec:
+  rules:
+    - host: srvcl8tr-dev.k8s2.latis.umn.edu
+      http:
+        paths:
+          - path: /?(.*)
+            backend:
+              serviceName: umnlatisservicelater-dev
+              servicePort: 8080
