@@ -50,6 +50,7 @@ COPY . /var/www/html
 
 RUN chmod -R 777 /var/www/html/storage/
 RUN chmod -R 777 /var/www/html/bootstrap/
+RUN chmod -R 777 /var/www/html/public/
 
 COPY runscript.sh /var/www/html
 CMD ["sh", "runscript.sh"]
