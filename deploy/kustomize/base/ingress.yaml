@@ -4,20 +4,6 @@ metadata:
   name: cla-ingress-svcl8tr
   annotations:
     kubernetes.io/ingress.class: nginx
-    kubernetes.io/ingress.allow-http: "false"
-    nginx.ingress.kubernetes.io/rewrite-target: /$1
-    cert-manager.io/cluster-issuer: cluster-issuer
-spec:
-  tls:
-  rules:
-
----
-apiVersion: extensions/v1beta1
-kind: Ingress
-metadata:
-  name: cla-ingress2-svcl8tr
-  annotations:
-    kubernetes.io/ingress.class: nginx
     kubernetes.io/ingress.allow-http: "true"
     nginx.ingress.kubernetes.io/force-ssl-redirect: "false"
     nginx.ingress.kubernetes.io/rewrite-target: /$1
