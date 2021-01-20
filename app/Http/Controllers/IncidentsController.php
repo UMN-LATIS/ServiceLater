@@ -7,6 +7,7 @@ use App\DataTables\IncidentsDataTable;
 use Illuminate\Http\Request;
 use App\Incident;
 use Auth;
+use Log;
 class IncidentsController extends Controller
 {
     public function index(IncidentsDataTable $dataTable)
