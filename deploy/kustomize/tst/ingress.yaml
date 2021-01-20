@@ -3,10 +3,6 @@ kind: Ingress
 metadata:
   name: cla-ingress-svcl8tr
 spec:
-  tls:
-    - hosts:
-      - srvcl8tr-tst.k8s.latis.umn.edu
-      secretName: ingress-tls
   rules:
     - host: srvcl8tr-tst.k8s.latis.umn.edu
       http:
