@@ -64,18 +64,18 @@ stages:
         failBuild: false
         customPolicyPath: '$(System.DefaultWorkingDirectory)/deploy/anchore/policy.json'
 
-  - job: Clusters
-    dependsOn: build
-    steps:
-    - ${{ each env in parameters.listOfEnvars }}:
-      - script: kustomize edit set image imagename=latisregistry.azurecr.io/umnlatisservicelater:$(tag)
-        workingDirectory: $(System.DefaultWorkingDirectory)/deploy/kustomize/${{ env }}
-        displayName: Update kustomize image tag $(tag)
-      - script: kustomize build > $(System.DefaultWorkingDirectory)/deploy/k2/${{ env }}.yml
-        workingDirectory: $(System.DefaultWorkingDirectory)/deploy/kustomize/${{ env }}
-        displayName: Build kustomize outputfiles
-      - ${{ each k8sSE in parameters.listOfK8sSE }}:       
-        - template: templates/k8s.yml
-          parameters:
-              k8sSE: ${{ k8sSE }}
-              env: ${{ env }}
+  # - job: Clusters
+  #   dependsOn: build
+  #   steps:
+  #   - ${{ each env in parameters.listOfEnvars }}:
+  #     - script: kustomize edit set image imagename=latisregistry.azurecr.io/umnlatisservicelater:$(tag)
+  #       workingDirectory: $(System.DefaultWorkingDirectory)/deploy/kustomize/${{ env }}
+  #       displayName: Update kustomize image tag $(tag)
+  #     - script: kustomize build > $(System.DefaultWorkingDirectory)/deploy/k2/${{ env }}.yml
+  #       workingDirectory: $(System.DefaultWorkingDirectory)/deploy/kustomize/${{ env }}
+  #       displayName: Build kustomize outputfiles
+  #     - ${{ each k8sSE in parameters.listOfK8sSE }}:       
+  #       - template: templates/k8s.yml
+  #         parameters:
+  #             k8sSE: ${{ k8sSE }}
+  #             env: ${{ env }}
