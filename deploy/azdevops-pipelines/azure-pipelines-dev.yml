@@ -61,13 +61,13 @@ stages:
         dockerfile: Dockerfile
         failBuild: true
 
-  - job: Clusters
-    dependsOn: build
-    steps:
-    - ${{ each k8sSE in parameters.listOfK8sSE }}:
-      - ${{ each env in parameters.listOfEnvars }}:
-        - template: templates/k8s.yml
-          parameters:
-              k8sSE: ${{ k8sSE }}
-              env: ${{ env }}
+  # - job: Clusters
+  #   dependsOn: build
+  #   steps:
+  #   - ${{ each k8sSE in parameters.listOfK8sSE }}:
+  #     - ${{ each env in parameters.listOfEnvars }}:
+  #       - template: templates/k8s.yml
+  #         parameters:
+  #             k8sSE: ${{ k8sSE }}
+  #             env: ${{ env }}
 
