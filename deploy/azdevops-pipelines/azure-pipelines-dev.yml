@@ -23,7 +23,7 @@ variables:
   containerRegistry: 'latisregistry.azurecr.io'
   dockerRegistryServiceConnection: 'b490f34e-f324-4440-bddd-bfbfbd11d3db'
   dockerfilePath: '**/Dockerfile'
-  tag: '$(Build.BuildId)'
+  tag: 'dev-$(Build.BuildId)'
 
 parameters:
 - name: listOfK8sSE
